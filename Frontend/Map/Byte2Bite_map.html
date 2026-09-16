@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Byte2Bite — Road-Aware Surplus Redistribution</title>
+
+  <link rel="stylesheet" href="leaflet.css" />
+  <link rel="stylesheet" href="Byte2BIte_map.css">
+</head>
+
+<body>
+
+  <div id="map-container">
+    <div id="map"></div>
+    <div class="b2b-location-pill">📍 <span>Rohtak, Haryana</span></div>
+    <div class="b2b-legend">
+      <div class="b2b-legend__row">
+        <span class="b2b-legend__dot b2b-legend__dot--source"></span>
+        <span>Surplus source (<span id="legend-source-count">18</span>)</span>
+      </div>
+      <div class="b2b-legend__row">
+        <span class="b2b-legend__dot b2b-legend__dot--recipient"></span>
+        <span>Recipient (<span id="legend-recipient-count">5</span>)</span>
+      </div>
+      <div class="b2b-legend__row">
+        <span class="b2b-legend__line"></span>
+        <span>Road route</span>
+      </div>
+      <div class="b2b-legend__note">Prototype data · not verified</div>
+    </div>
+  </div>
+
+  <aside id="b2b-analysis-panel" class="b2b-analysis-panel" aria-label="Logistics analysis">
+    <div class="b2b-analysis-head">
+      <h2>Logistics Analysis</h2>
+      <button type="button" id="b2b-analysis-close" class="b2b-analysis-close">×</button>
+    </div>
+    <div class="b2b-analysis-body">
+      <div class="b2b-analysis-scope" role="tablist" aria-label="Logistics analysis scope">
+        <button type="button" id="b2b-analysis-selected-tab" class="active">Selected route</button>
+        <button type="button" id="b2b-analysis-all-tab">Entire map</button>
+      </div>
+      <div id="b2b-selected-analysis" class="b2b-selected-analysis">
+        <div class="title">No route selected</div>
+        <div style="font-size:11.5px;color:#64748b;">Select an allocated route on the map or from the analysis list.
+        </div>
+      </div>
+      <div id="b2b-analysis-status" class="b2b-analysis-status">Run full analysis to optimize all compatible routes.
+      </div>
+      <div id="b2b-analysis-all-content">
+        <div class="b2b-a-grid">
+          <div class="b2b-a-stat">
+            <div class="k">Total surplus</div>
+            <div class="v" id="aTotalSurplus">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Allocated</div>
+            <div class="v" id="aAllocated">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Remaining surplus</div>
+            <div class="v" id="aRemaining">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Completion</div>
+            <div class="v" id="aCompletion">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Successful routes</div>
+            <div class="v" id="aSuccessRoutes">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Failed routes</div>
+            <div class="v" id="aFailedRoutes">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Road distance</div>
+            <div class="v" id="aDistance">—</div>
+          </div>
+          <div class="b2b-a-stat">
+            <div class="k">Road duration</div>
+            <div class="v" id="aDuration">—</div>
+          </div>
+        </div>
+        <div class="b2b-a-section">
+          <h3>Selected / Optimized Routes</h3>
+          <div id="aRoutes" class="b2b-a-list">No analysis yet.</div>
+        </div>
+        <div class="b2b-a-section">
+          <h3>Source performance</h3>
+          <div id="aSources">No analysis yet.</div>
+        </div>
+        <div class="b2b-a-section">
+          <h3>Recipient performance</h3>
+          <div id="aRecipients">No analysis yet.</div>
+        </div>
+        <div class="b2b-a-section">
+          <h3>Food-type breakdown</h3>
+          <div id="aFoodTypes">No analysis yet.</div>
+        </div>
+      </div>
+      <div class="b2b-a-disclaimer">Prototype analytics use the current synthetic operational values. Replace them with
+        validated operational data for deployment.</div>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="Byte2Bite_map.js"></script>
+
+</body>
+
+</html>
