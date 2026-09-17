@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Kitchen Food Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Smart Kitchen Food Calculator</h1>
+        <div class="subtitle">Calculate food requirements using population, portions, cooking yield and a contingency
+            buffer.</div>
+
+        <div class="card">
+            <div class="grid">
+                <div><label for="population">Population</label><input id="population" type="number" value="1000"
+                        min="1"></div>
+                <div><label for="meal">Meal</label><select id="meal">
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch" selected>Lunch</option>
+                        <option value="dinner">Dinner</option>
+                    </select></div>
+                <div><label for="buffer">Safety Buffer (%)</label><input id="buffer" type="number" value="5" min="0"
+                        max="100" step="1"></div>
+                <div><label for="staple">Staple</label><select id="staple">
+                        <option value="rice" selected>Rice</option>
+                        <option value="roti">Roti</option>
+                        <option value="both">Rice + Roti</option>
+                    </select></div>
+                <div><label for="protein">Protein</label><select id="protein">
+                        <option value="dal" selected>Dal</option>
+                        <option value="paneer">Paneer</option>
+                        <option value="soyabean">Soyabean</option>
+                    </select></div>
+            </div>
+        </div>
+
+        <div id="error" class="error"></div>
+        <div class="card"><button id="calculateBtn">Calculate Requirement</button></div>
+
+        <div id="results" class="results">
+            <div class="card">
+                <h2>Result</h2>
+                <div class="metrics">
+                    <div class="metric"><span>Total Population</span><strong id="totalPopulation">-</strong></div>
+                    <div class="metric"><span>Effective Population</span><strong id="effectivePopulation">-</strong>
+                    </div>
+                    <div class="metric"><span>Base Cooked Food</span><strong id="baseCooked">-</strong></div>
+                    <div class="metric"><span>Preparation Target</span><strong id="targetCooked">-</strong></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Food Requirement</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Cooked Quantity (kg)</th>
+                            <th>Raw Ingredient</th>
+                            <th>Raw Quantity (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="foodTable"></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Buffer</h2>
+                <div class="metrics">
+                    <div class="metric"><span>Buffer</span><strong id="bufferPercent">-</strong></div>
+                    <div class="metric"><span>Extra Cooked Food</span><strong id="extraCooked">-</strong></div>
+                    <div class="metric"><span>Base Raw Food</span><strong id="baseRaw">-</strong></div>
+                    <div class="metric"><span>Target Raw Food</span><strong id="targetRaw">-</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="calculator-core.js"></script>
+</body>
+
+</html>

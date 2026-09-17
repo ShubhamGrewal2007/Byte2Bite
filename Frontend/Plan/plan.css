@@ -1,0 +1,605 @@
+/* Byte2Bite — Plan page.
+ * Tokens aligned to Dashboard.css. Loaded AFTER Dashboard.css so it inherits
+ * the dashboard design system (colors, radii, shadows, typography, sidebar).
+ */
+
+:root {
+  --bg:            var(--beige);
+  --card:          var(--white);
+  --primary:       var(--forest);
+  --primary-hover: var(--forest-deep);
+  --primary-soft:  var(--sage);
+  --primary-tint:  #EEF3EC;
+  --accent:        var(--warm-orange);
+  --accent-tint:   var(--warm-orange-soft);
+  --text:          var(--charcoal);
+  --text-muted:    var(--charcoal-soft);
+  --border:        rgba(0, 0, 0, 0.06);
+  --danger:        #A32828;
+  --danger-tint:   #FBEDED;
+  --warning:       #B87514;
+  --warning-tint:  #FDF3E2;
+  --safe:          #3A5E3B;
+  --safe-tint:     #E9F3EA;
+
+  --radius-card:   var(--radius-lg);
+  --radius-pill:   999px;
+  --radius-input:  var(--radius-sm);
+  --shadow:        var(--shadow-sm);
+  --shadow-soft:   var(--shadow-sm);
+
+  --font-body: var(--font);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------- Layout ---------------- */
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  /* .main already provides horizontal padding; keep only bottom breathing room. */
+  padding: 0 0 32px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 {
+  margin: 0 0 4px;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.date-pill {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-size: 13px;
+  box-shadow: var(--shadow-soft);
+}
+
+.section { margin-bottom: 28px; }
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------------- Cards ---------------- */
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+.card-head { margin-bottom: 18px; }
+
+.card-title {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-desc {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ---------------- Metrics ---------------- */
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.metrics-inner { grid-template-columns: repeat(3, 1fr); margin-bottom: 4px; }
+
+.metric {
+  background: var(--card);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.metric .metric-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.metric .metric-value {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+}
+
+.metric .metric-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------------- Planner form ---------------- */
+
+.planner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 8px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 7px;
+  color: var(--text);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  font-size: 15px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--primary-soft);
+  box-shadow: 0 0 0 3px rgba(168, 198, 159, 0.25);
+}
+
+.field-action { display: flex; align-items: flex-end; }
+
+.btn-primary {
+  width: 100%;
+  padding: 13px 20px;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-primary:active { transform: translateY(1px); }
+
+/* ---------------- Alerts / result ---------------- */
+
+.alert {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-input);
+  background: var(--danger-tint);
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.result-area {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.empty-state {
+  margin: 0;
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  background: var(--primary-tint);
+  border-radius: var(--radius-input);
+}
+
+/* ---------------- Tables ---------------- */
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.data-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.data-table tbody tr:hover { background: #FAFCF9; }
+
+/* ---------------- Status pills ---------------- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pill.safe    { background: var(--safe-tint);    color: var(--safe); }
+.pill.warning { background: var(--warning-tint); color: var(--warning); }
+.pill.danger  { background: var(--danger-tint);  color: var(--danger); }
+
+.recommendation-note {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--accent-tint);
+  color: var(--accent);
+  border-radius: var(--radius-input);
+  font-size: 14px;
+}
+
+/* ---------------- Recommendation cards ---------------- */
+
+.rec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.rec-card {
+  background: var(--card);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rec-card.type-expiry  { border-left-color: var(--warning); }
+.rec-card.type-surplus { border-left-color: var(--accent); }
+.rec-card.type-review  { border-left-color: var(--primary); }
+
+.rec-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rec-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-tint);
+  color: var(--primary);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.rec-card.type-expiry  .rec-icon { background: var(--warning-tint); color: var(--warning); }
+.rec-card.type-surplus .rec-icon { background: var(--accent-tint);  color: var(--accent); }
+.rec-card.type-review  .rec-icon { background: var(--safe-tint);    color: var(--safe); }
+
+.rec-card h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rec-card p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.rec-type-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.rec-card.type-expiry  .rec-type-label { color: var(--warning); }
+.rec-card.type-surplus .rec-type-label { color: var(--accent); }
+.rec-card.type-review  .rec-type-label { color: var(--safe); }
+
+/* ---------------- Task 2 — Serving Planner additions ---------------- */
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--danger);
+  line-height: 1.35;
+}
+
+.field input.invalid,
+.field select.invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(163, 40, 40, 0.12);
+}
+
+.result-panel {
+  margin-bottom: 18px;
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.result-panel:last-child { margin-bottom: 0; }
+
+.result-title {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.result-summary {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--primary);
+  background: var(--primary-tint);
+  border-radius: var(--radius-input);
+  font-weight: 500;
+}
+
+.result-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(--primary-tint);
+  color: var(--primary);
+  text-transform: capitalize;
+}
+
+.badge.badge-meal    { background: var(--primary-tint); color: var(--primary); }
+.badge.badge-staple  { background: var(--safe-tint);    color: var(--safe); }
+.badge.badge-protein { background: var(--accent-tint);  color: var(--accent); }
+.badge.badge-margin  { background: var(--warning-tint); color: var(--warning); }
+
+.metrics-inner .metric {
+  background: var(--primary-tint);
+  border: 0;
+  box-shadow: none;
+}
+
+/* ---------------- Task 3 — Expiry Intelligence additions ---------------- */
+
+.expiry-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.expiry-summary .count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(--primary-tint);
+  color: var(--primary);
+}
+
+.expiry-summary .count.safe    { background: var(--safe-tint);    color: var(--safe); }
+.expiry-summary .count.warning { background: var(--warning-tint); color: var(--warning); }
+.expiry-summary .count.danger  { background: var(--danger-tint);  color: var(--danger); }
+
+.urgency-bar {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  margin-top: 6px;
+  background: var(--primary-tint);
+  overflow: hidden;
+}
+
+.urgency-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary-soft);
+}
+
+.urgency-bar.warning > span { background: var(--warning); }
+.urgency-bar.danger  > span { background: var(--danger); }
+.urgency-bar.safe    > span { background: var(--primary-soft); }
+
+.item-name {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.item-category {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  margin-top: 2px;
+}
+
+/* ---------------- Task 4/5 — Recent Plans additions ---------------- */
+
+.recent-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.recent-summary .count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(--primary-tint);
+  color: var(--primary);
+}
+
+.meal-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--primary-tint);
+  color: var(--primary);
+  text-transform: capitalize;
+}
+
+.surplus-zero {
+  color: var(--text-muted);
+}
+
+.surplus-positive {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 900px) {
+  .metrics,
+  .metrics-inner { grid-template-columns: repeat(2, 1fr); }
+
+  .planner-grid { grid-template-columns: repeat(2, 1fr); }
+  .rec-grid     { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .page { padding: 0 0 24px; }
+
+  .page-header h1 { font-size: 24px; }
+
+  .metrics,
+  .metrics-inner,
+  .planner-grid,
+  .rec-grid { grid-template-columns: 1fr; }
+
+  .card { padding: 18px; }
+
+  .metric .metric-value { font-size: 22px; }
+
+  .result-panel { padding: 14px 16px; }
+  .result-summary { font-size: 13.5px; }
+  .badge { font-size: 12px; padding: 4px 10px; }
+}
+
+/* ============================================================
+   PAGE HEADER META — Date pill + Kitchen/account control
+   Ensures [ Date pill ] [ Kitchen/account control ] in that
+   order, aligned horizontally on the right, matching the
+   Dashboard header-actions layout. Visual styling of both
+   children comes from Dashboard.css; this only arranges them.
+   ============================================================ */
+.page-header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .page-header-meta {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+}

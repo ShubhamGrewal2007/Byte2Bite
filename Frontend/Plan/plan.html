@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Byte2Bite · Plan</title>
+
+  <!-- Same CDNs as Dashboard.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Reuse the dashboard design system, then layer Plan overrides -->
+  <link rel="stylesheet" href="../Dashboard/Dashboard.css" />
+  <link rel="stylesheet" href="plan.css" />
+</head>
+
+<body>
+  <!-- Same mobile shell as Dashboard.html -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="app">
+    <!-- ========== SIDEBAR (matches Dashboard.html; "Plan" active) ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <span class="logo-text">Byte2Bite</span>
+        </div>
+
+        <button class="collapse-btn" id="collapseBtn" aria-label="Toggle sidebar">
+          <i class="fas fa-chevron-left" id="collapseIcon"></i>
+          <span class="collapse-text" id="collapseText">Collapse</span>
+        </button>
+
+        <nav class="nav-list">
+          <a href="../Dashboard/Dashboard.html" class="nav-item" data-tooltip="Overview">
+            <i class="fas fa-chart-pie"></i>
+            <span class="nav-label">Overview</span>
+          </a>
+          <a href="../Plan/plan.html" class="nav-item active" data-tooltip="Plan" aria-current="page">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="nav-label">Plan</span>
+          </a>
+          <a href="../Surplus/surplus.html" class="nav-item" data-tooltip="Surplus">
+            <i class="fas fa-box-open"></i>
+            <span class="nav-label">Surplus</span>
+          </a>
+          <a href="../Efficiency/efficiency.html" class="nav-item" data-tooltip="Efficiency">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="nav-label">Efficiency</span>
+          </a>
+          <a href="../Impact/impact.html" class="nav-item" data-tooltip="Impact">
+            <i class="fas fa-seedling"></i>
+            <span class="nav-label">Impact</span>
+          </a>
+          <a href="../Network/network.html" class="nav-item" data-tooltip="Network">
+            <i class="fas fa-network-wired"></i>
+            <span class="nav-label">Network</span>
+          </a>
+          <a href="../Reports/reports.html" class="nav-item" data-tooltip="Reports">
+            <i class="fas fa-file-alt"></i>
+            <span class="nav-label">Reports</span>
+          </a>
+          <a href="../Settings/settings.html" class="nav-item" data-tooltip="Settings">
+            <i class="fas fa-gear"></i>
+            <span class="nav-label">Settings</span>
+          </a>
+        </nav>
+      </div>
+      <div class="sidebar-footer">
+        <!-- Sidebar trigger for the same single dropdown component. -->
+        <div class="sidebar-kitchen-wrap" id="sidebarKitchenWrap">
+          <button class="kitchen-badge" id="sidebarKitchenControl" type="button"
+            aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+            <i class="fas fa-utensils"></i>
+            <span class="kitchen-info">Kitchen 01</span>
+          </button>
+        </div>
+        <div class="admin-profile">
+          <div class="avatar">AK</div>
+          <span class="admin-text">Admin</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main">
+      <div class="page">
+
+        <!-- ================= PAGE HEADER ================= -->
+        <header class="page-header">
+          <div class="page-header-text">
+            <h1>Plan</h1>
+            <p class="subtitle">Plan today's production with better accuracy and less waste.</p>
+          </div>
+          <div class="page-header-meta">
+            <!-- Date pill first (Dashboard order), then kitchen/account control -->
+            <span class="date-pill" id="headerDate">—</span>
+
+            <!-- Kitchen / Profile control + dropdown (identical to Dashboard) -->
+            <div class="kitchen-control-wrap" id="topKitchenWrap">
+              <button class="kitchen-control" id="kitchenControl" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+                <i class="fas fa-utensils"></i>
+                <span>Kitchen 01</span>
+                <i class="fas fa-chevron-down kitchen-control-caret"></i>
+              </button>
+
+              <div class="kitchen-dropdown" id="kitchenDropdown" role="menu" aria-label="Account menu">
+                <div class="kitchen-dropdown-header">
+                  <div class="kitchen-dropdown-avatar">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="kitchen-dropdown-identity">
+                    <div class="kitchen-name">Kitchen 01</div>
+                    <div class="kitchen-role">Kitchen</div>
+                  </div>
+                </div>
+
+                <div class="kitchen-dropdown-divider"></div>
+
+                <a class="kitchen-dropdown-item" role="menuitem" href="../Settings/settings.html">
+                  <i class="fas fa-gear"></i>
+                  <span>Settings</span>
+                </a>
+
+                <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenProfileBtn">
+                  <i class="fas fa-user"></i>
+                  <span>Profile</span>
+                </button>
+
+                <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenSignOutBtn">
+                  <i class="fas fa-right-from-bracket"></i>
+                  <span>Sign out</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- ================= SNAPSHOT ================= -->
+        <section class="section">
+          <h2 class="section-title">Planning Snapshot</h2>
+          <div class="metrics" id="snapshotMetrics"></div>
+        </section>
+
+        <!-- ================= SERVING PLANNER ================= -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h2 class="card-title">Serving Planner</h2>
+              <p class="card-desc">Enter today's serving target and ingredients to calculate kitchen requirements.</p>
+            </div>
+
+            <form id="servingPlannerForm" class="planner-grid" novalidate>
+
+              <div class="field">
+                <label for="calcMeal">Meal</label>
+                <select id="calcMeal" name="meal" required>
+                  <option value="">Select meal…</option>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                </select>
+                <span class="field-error" id="errCalcMeal" hidden></span>
+              </div>
+
+              <div class="field">
+                <label for="calcStaple">Staple</label>
+                <select id="calcStaple" name="staple" required>
+                  <option value="">Select staple…</option>
+                  <option value="rice">Rice</option>
+                  <option value="roti">Wheat flour (Roti)</option>
+                  <option value="both">Rice + Roti</option>
+                </select>
+                <span class="field-error" id="errCalcStaple" hidden></span>
+              </div>
+
+              <div class="field">
+                <label for="calcProtein">Protein</label>
+                <select id="calcProtein" name="protein" required>
+                  <option value="">Select protein…</option>
+                  <option value="dal">Dal</option>
+                  <option value="paneer">Paneer</option>
+                  <option value="soyabean">Soyabean</option>
+                </select>
+                <span class="field-error" id="errCalcProtein" hidden></span>
+              </div>
+
+              <div class="field">
+                <label for="calcServings">Expected servings</label>
+                <input id="calcServings" name="servings" type="number" min="1" step="1" inputmode="numeric" required />
+                <span class="field-error" id="errCalcServings" hidden></span>
+              </div>
+
+              <div class="field">
+                <label for="calcMargin">Safety margin (%)</label>
+                <input id="calcMargin" name="margin" type="number" min="0" max="100" step="1" inputmode="numeric"
+                  required />
+                <span class="field-error" id="errCalcMargin" hidden></span>
+              </div>
+
+              <div class="field field-action">
+                <button id="calcBtn" class="btn-primary" type="submit">
+                  Calculate Requirement
+                </button>
+              </div>
+            </form>
+
+            <div id="calcError" class="alert" hidden></div>
+
+            <!-- ========== RESULT AREA ========== -->
+            <div class="result-area" id="calcResultArea">
+
+              <p class="empty-state" id="calcEmpty">
+                Enter today's expected servings, meal and ingredients above, then click
+                <strong>Calculate Requirement</strong> to generate the kitchen plan.
+              </p>
+
+              <div id="calcResult" hidden>
+
+                <div class="result-panel">
+                  <h3 class="result-title">Serving Requirement</h3>
+                  <div class="metrics metrics-inner" id="calcMetrics"></div>
+                  <p class="result-summary" id="calcSummary"></p>
+                  <div class="result-badges" id="calcBadges"></div>
+                </div>
+
+                <div class="result-panel">
+                  <h3 class="result-title">Ingredient Breakdown</h3>
+                  <div class="table-wrap">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Category</th>
+                          <th>Ingredient</th>
+                          <th>Cooked (kg)</th>
+                          <th>Raw (kg)</th>
+                          <th>Target Raw (kg)</th>
+                        </tr>
+                      </thead>
+                      <tbody id="calcTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="result-panel">
+                  <h3 class="result-title">Preparation Target</h3>
+                  <div class="table-wrap">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Ingredient</th>
+                          <th>Target raw quantity (kg)</th>
+                        </tr>
+                      </thead>
+                      <tbody id="calcTargetBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= EXPIRY INTELLIGENCE ================= -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h2 class="card-title">Expiry Intelligence</h2>
+              <p class="card-desc">Ingredients approaching their expiry, and what to do about them.</p>
+            </div>
+
+            <div class="expiry-summary" id="expirySummary"></div>
+
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Days remaining</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="expiryBody"></tbody>
+              </table>
+            </div>
+
+            <div class="recommendation-note" id="expiryNote" hidden></div>
+          </div>
+        </section>
+
+        <!-- ================= RECOMMENDATIONS ================= -->
+        <section class="section">
+          <h2 class="section-title">Planning Recommendations</h2>
+          <div class="rec-grid" id="recGrid"></div>
+        </section>
+
+        <!-- ================= RECENT PLANS ================= -->
+        <section class="section">
+          <div class="card">
+            <div class="card-head">
+              <h2 class="card-title">Recent Plans</h2>
+              <p class="card-desc">Recently generated production plans.</p>
+            </div>
+
+            <div class="recent-summary" id="recentSummary"></div>
+
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Meal</th>
+                    <th>Expected</th>
+                    <th>Produced</th>
+                    <th>Surplus</th>
+                  </tr>
+                </thead>
+                <tbody id="recentBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Shared identity/auth stack (same order as Dashboard.html) -->
+  <script src="../Dashboard/config.js"></script>
+  <script src="../Dashboard/api.js"></script>
+  <script src="../Dashboard/auth-ui.js"></script>
+
+  <!-- Plan-specific scripts -->
+  <script src="../calculator/calculator-core.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="plan.js"></script>
+
+  <script>
+    if (window.Byte2BiteAuth && typeof window.Byte2BiteAuth.init === "function") {
+      window.Byte2BiteAuth.init();
+    }
+  </script>
+</body>
+
+</html>

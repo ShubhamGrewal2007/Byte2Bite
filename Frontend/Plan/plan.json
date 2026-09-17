@@ -1,0 +1,49 @@
+{
+  "snapshot": {
+    "expectedServings": 1240,
+    "plannedProduction": 1210,
+    "expiringItems": 3,
+    "estimatedSurplus": 24
+  },
+
+  "calculator": {
+    "defaultMeal": "lunch",
+    "defaultStaple": "rice",
+    "defaultProtein": "dal",
+    "expectedServings": 1240,
+    "safetyMargin": 5
+  },
+
+  "expiry": [
+    { "name": "Paneer",   "quantity": 4.2, "unit": "kg", "daysRemaining": 2,  "status": "warning", "category": "protein"   },
+    { "name": "Tomatoes", "quantity": 8,   "unit": "kg", "daysRemaining": 3,  "status": "warning", "category": "vegetable" },
+    { "name": "Spinach",  "quantity": 3.5, "unit": "kg", "daysRemaining": 1,  "status": "danger",  "category": "vegetable" },
+    { "name": "Rice",     "quantity": 25,  "unit": "kg", "daysRemaining": 12, "status": "safe",    "category": "staple"    },
+    { "name": "Dal",      "quantity": 14,  "unit": "kg", "daysRemaining": 9,  "status": "safe",    "category": "protein"   }
+  ],
+
+  "recommendations": [
+    {
+      "title": "Prioritize expiring ingredients",
+      "description": "Paneer and spinach are nearing expiry. Consider featuring them in today's menu to avoid waste.",
+      "type": "expiry"
+    },
+    {
+      "title": "Potential surplus detected",
+      "description": "Expected servings exceed planned production by 30. Adjust portions or redistribute.",
+      "type": "surplus"
+    },
+    {
+      "title": "Review today's production plan",
+      "description": "Lunch demand is trending higher than last week. Consider a small safety margin increase.",
+      "type": "review"
+    }
+  ],
+
+  "recentPlans": [
+    { "date": "2026-09-17", "meal": "Lunch",  "expected": 1240, "produced": 1210, "surplus": 0 },
+    { "date": "2026-09-16", "meal": "Dinner", "expected": 380,  "produced": 372,  "surplus": 8 },
+    { "date": "2026-09-16", "meal": "Lunch",  "expected": 420,  "produced": 416,  "surplus": 4 },
+    { "date": "2026-09-15", "meal": "Dinner", "expected": 400,  "produced": 395,  "surplus": 5 }
+  ]
+}
