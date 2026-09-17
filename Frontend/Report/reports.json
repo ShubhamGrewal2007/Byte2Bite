@@ -1,0 +1,84 @@
+{
+  "module": "Byte2Bite Reports",
+  "version": "1.0-prototype",
+  "source": "synthetic demo fallback",
+  "records": [
+    {
+      "id": "demo-1",
+      "date": "2026-09-15",
+      "meal": "Breakfast",
+      "expectedServings": 320,
+      "plannedProduction": 320,
+      "actualProduction": 330,
+      "surplus": 10,
+      "materialWaste": 3.2,
+      "energyUsedKwh": 72
+    },
+    {
+      "id": "demo-2",
+      "date": "2026-09-15",
+      "meal": "Lunch",
+      "expectedServings": 480,
+      "plannedProduction": 480,
+      "actualProduction": 505,
+      "surplus": 25,
+      "materialWaste": 5.1,
+      "energyUsedKwh": 118
+    },
+    {
+      "id": "demo-3",
+      "date": "2026-09-15",
+      "meal": "Dinner",
+      "expectedServings": 390,
+      "plannedProduction": 390,
+      "actualProduction": 382,
+      "surplus": 0,
+      "materialWaste": 2.4,
+      "energyUsedKwh": 91
+    },
+    {
+      "id": "demo-4",
+      "date": "2026-09-16",
+      "meal": "Breakfast",
+      "expectedServings": 315,
+      "plannedProduction": 315,
+      "actualProduction": 318,
+      "surplus": 3,
+      "materialWaste": 2.9,
+      "energyUsedKwh": 69
+    },
+    {
+      "id": "demo-5",
+      "date": "2026-09-16",
+      "meal": "Lunch",
+      "expectedServings": 500,
+      "plannedProduction": 500,
+      "actualProduction": 515,
+      "surplus": 15,
+      "materialWaste": 4.2,
+      "energyUsedKwh": 121
+    },
+    {
+      "id": "demo-6",
+      "date": "2026-09-16",
+      "meal": "Dinner",
+      "expectedServings": 400,
+      "plannedProduction": 400,
+      "actualProduction": 414,
+      "surplus": 14,
+      "materialWaste": 3.8,
+      "energyUsedKwh": 96
+    },
+    {
+      "id": "demo-7",
+      "date": "2026-09-17",
+      "meal": "Lunch",
+      "expectedServings": 510,
+      "plannedProduction": 510,
+      "actualProduction": 528,
+      "surplus": 18,
+      "materialWaste": 4.8,
+      "energyUsedKwh": 124
+    }
+  ]
+}

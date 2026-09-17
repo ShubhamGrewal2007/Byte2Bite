@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Byte2Bite — Reports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Dashboard/Dashboard.css">
+  <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar network-sidebar" aria-label="Main navigation">
+    <div>
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+        <span class="logo-text">Byte2Bite</span>
+      </div>
+      <nav class="nav-list">
+        <a href="../Dashboard/Dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i><span class="nav-label">Overview</span></a>
+        <a href="../Plan/plan.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span class="nav-label">Plan</span></a>
+        <a href="../Surplus/surplus.html" class="nav-item"><i class="fas fa-box-open"></i><span class="nav-label">Surplus</span></a>
+        <a href="../Efficiency/efficiency.html" class="nav-item"><i class="fas fa-tachometer-alt"></i><span class="nav-label">Efficiency</span></a>
+        <a href="../Impact/impact.html" class="nav-item"><i class="fas fa-seedling"></i><span class="nav-label">Impact</span></a>
+        <a href="../Network/network.html" class="nav-item"><i class="fas fa-network-wired"></i><span class="nav-label">Network</span></a>
+        <a href="reports.html" class="nav-item active" aria-current="page"><i class="fas fa-file-alt"></i><span class="nav-label">Reports</span></a>
+        <a href="../Settings/settings.html" class="nav-item"><i class="fas fa-gear"></i><span class="nav-label">Settings</span></a>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-kitchen-wrap">
+        <div class="kitchen-badge"><i class="fas fa-utensils"></i><span class="kitchen-info">abcd</span></div>
+      </div>
+      <div class="admin-profile"><div class="avatar">A</div><span class="admin-text">Kitchen</span></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="page-header">
+      <div class="page-header-text">
+        <p class="eyebrow">BYTE2BITE</p>
+        <h1>Reports</h1>
+        <p>Generate a consolidated operational and sustainability report.</p>
+      </div>
+      <div class="page-header-meta">
+        <button class="mobile-menu" id="menuBtn" type="button" aria-label="Open navigation">☰</button>
+        <span class="date-pill">18 Sept 2026</span>
+        <div class="kitchen-control-wrap">
+          <button class="kitchen-control" type="button"><i class="fas fa-utensils"></i><span>abcd</span><i class="fas fa-chevron-down kitchen-control-caret"></i></button>
+        </div>
+        <button id="generateReportBtn" class="primary-btn"><i class="fas fa-file-export"></i> Generate Report</button>
+      </div>
+    </header>
+
+    <section class="card period-card">
+      <div class="section-head"><div><h2>Reporting Period</h2><p>Select the records included in the dashboard and generated report.</p></div></div>
+      <div class="period-controls" role="group" aria-label="Reporting period">
+        <button data-period="all" class="period-btn active">All Records</button>
+        <button data-period="last7" class="period-btn">Last 7 Recorded Days</button>
+        <button data-period="last30" class="period-btn">Last 30 Recorded Days</button>
+        <button data-period="custom" class="period-btn">Custom Date Range</button>
+      </div>
+      <div id="customRange" class="custom-range" hidden>
+        <label>From <input id="fromDate" type="date"></label>
+        <label>To <input id="toDate" type="date"></label>
+        <button id="applyRange" class="secondary-btn">Apply</button>
+      </div>
+      <div id="periodLabel" class="muted"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><h2>Report Overview</h2><p id="overviewText">Loading report data…</p></div></div>
+      <div id="kpis" class="kpi-grid"></div>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="card"><div class="section-head"><h2>Production &amp; Surplus</h2></div><div id="productionVisual"></div></article>
+      <article class="card"><div class="section-head"><h2>Resource Efficiency</h2></div><div id="efficiencyVisual"></div></article>
+      <article class="card"><div class="section-head"><h2>Sustainability Impact</h2></div><div id="impactVisual"></div></article>
+      <article class="card"><div class="section-head"><h2>Redistribution Network</h2></div><div id="networkVisual"></div></article>
+    </section>
+
+    <section class="card section"><div class="section-head"><div><h2>Insights &amp; Recommendations</h2><p>Deterministic observations based on the selected period.</p></div></div><div id="insights" class="insight-grid"></div></section>
+
+    <section class="card section"><div class="section-head"><div><h2>Historical Production</h2><p>Filters affect this table only.</p></div></div>
+      <div class="filters"><input id="prodSearch" placeholder="Search meal…" aria-label="Search production"><select id="prodMeal"><option value="">All meals</option></select><select id="prodSource"><option value="">All sources</option></select><select id="prodSort"><option value="date-desc">Newest first</option><option value="date-asc">Oldest first</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th>Date</th><th>Meal</th><th>Planned</th><th>Actual</th><th>Surplus</th><th>Material Waste</th><th>Energy</th><th>Source</th><th></th></tr></thead><tbody id="prodRows"></tbody></table></div>
+      <button id="prodMore" class="secondary-btn load-more" hidden>Load more</button>
+    </section>
+
+    <section class="card section"><div class="section-head"><div><h2>Network Operations</h2><p>Saved redistribution activity represented in the report period.</p></div></div>
+      <div class="filters"><input id="netSearch" placeholder="Search source or recipient…" aria-label="Search network"><select id="netSort"><option value="date-desc">Newest first</option><option value="date-asc">Oldest first</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th>Date</th><th>Source</th><th>Recipient</th><th>Meals</th><th>Distance</th><th>Duration</th><th></th></tr></thead><tbody id="netRows"></tbody></table></div>
+      <button id="netMore" class="secondary-btn load-more" hidden>Load more</button>
+    </section>
+
+    <section class="card section"><div class="section-head"><div><h2>Data Sources</h2><p>Source coverage represented in this report.</p></div></div><div id="sources" class="source-grid"></div></section>
+  </main>
+</div>
+
+<div id="reportPreview" class="report-preview" hidden><div class="preview-toolbar"><button id="closePreview" class="secondary-btn">Close</button><button id="printReport" class="primary-btn">Print / Save PDF</button></div><div id="previewContent" class="print-sheet"></div></div>
+<div id="modal" class="modal" hidden><div class="modal-backdrop"></div><div class="modal-card" role="dialog" aria-modal="true"><button id="closeModal" class="modal-close" aria-label="Close">×</button><div id="modalContent"></div></div></div>
+
+<script src="../Dashboard/config.js"></script>
+<script src="../Dashboard/api.js"></script>
+<script src="../Dashboard/auth-ui.js"></script>
+<script src="reports.js"></script>
+</body>
+</html>
