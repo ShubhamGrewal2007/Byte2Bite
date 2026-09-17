@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Byte2Bite — Network</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <link rel="stylesheet" href="leaflet.css">
+  <link rel="stylesheet" href="map.css">
+  <link rel="stylesheet" href="network.css">
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body class="network-page" data-page="network">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+      <div>
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <span class="logo-text">Byte2Bite</span>
+        </div>
+
+        <nav class="nav-list">
+          <a href="../Dashboard/Dashboard.html" class="nav-item" data-tooltip="Overview">
+            <i class="fas fa-chart-pie"></i>
+            <span class="nav-label">Overview</span>
+          </a>
+          <a href="../Plan/plan.html" class="nav-item" data-tooltip="Plan">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="nav-label">Plan</span>
+          </a>
+          <a href="../Surplus/surplus.html" class="nav-item" data-tooltip="Surplus">
+            <i class="fas fa-box-open"></i>
+            <span class="nav-label">Surplus</span>
+          </a>
+          <a href="../Efficiency/efficiency.html" class="nav-item" data-tooltip="Efficiency">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="nav-label">Efficiency</span>
+          </a>
+          <a href="../Impact/impact.html" class="nav-item" data-tooltip="Impact">
+            <i class="fas fa-seedling"></i>
+            <span class="nav-label">Impact</span>
+          </a>
+          <a href="./network.html" class="nav-item active" data-tooltip="Network" aria-current="page">
+            <i class="fas fa-network-wired"></i>
+            <span class="nav-label">Network</span>
+          </a>
+          <a href="../Reports/reports.html" class="nav-item" data-tooltip="Reports">
+            <i class="fas fa-file-alt"></i>
+            <span class="nav-label">Reports</span>
+          </a>
+          <a href="../Settings/settings.html" class="nav-item" data-tooltip="Settings">
+            <i class="fas fa-gear"></i>
+            <span class="nav-label">Settings</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-kitchen-wrap" id="sidebarKitchenWrap">
+          <button class="kitchen-badge" id="sidebarKitchenControl" type="button"
+            aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+            <i class="fas fa-utensils"></i>
+            <span class="kitchen-info">Kitchen 01</span>
+          </button>
+        </div>
+        <div class="admin-profile">
+          <div class="avatar">AK</div>
+          <span class="admin-text">Admin</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="network-main">
+      <header class="network-header">
+        <div>
+          <div class="network-eyebrow">DISTRIBUTION NETWORK</div>
+          <h1 id="networkPageTitle">Network</h1>
+          <p>Connect surplus food with nearby recipients.</p>
+        </div>
+        <div class="page-header-meta">
+          <button class="mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
+          <span class="date-pill" id="networkDate">—</span>
+
+          <div class="kitchen-control-wrap" id="topKitchenWrap">
+            <button class="kitchen-control" id="kitchenControl" type="button"
+              aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+              <i class="fas fa-utensils"></i>
+              <span>Kitchen 01</span>
+              <i class="fas fa-chevron-down kitchen-control-caret"></i>
+            </button>
+
+            <div class="kitchen-dropdown" id="kitchenDropdown" role="menu" aria-label="Account menu">
+              <div class="kitchen-dropdown-header">
+                <div class="kitchen-dropdown-avatar">
+                  <i class="fas fa-utensils"></i>
+                </div>
+                <div class="kitchen-dropdown-identity">
+                  <div class="kitchen-name">Kitchen 01</div>
+                  <div class="kitchen-role">Kitchen</div>
+                </div>
+              </div>
+
+              <div class="kitchen-dropdown-divider"></div>
+
+              <a class="kitchen-dropdown-item" role="menuitem" href="../Settings/settings.html">
+                <i class="fas fa-gear"></i>
+                <span>Settings</span>
+              </a>
+
+              <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenProfileBtn">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+              </button>
+
+              <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenSignOutBtn">
+                <i class="fas fa-right-from-bracket"></i>
+                <span>Sign out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="networkSelectionView" aria-labelledby="networkPageTitle">
+        <div class="network-stats" id="networkStats"></div>
+
+        <div class="network-workspace">
+          <section class="network-map-card" aria-labelledby="mapTitle">
+            <div class="network-card-head">
+              <div>
+                <div class="network-label">LIVE MAP</div>
+                <h2 id="mapTitle">Distribution Network</h2>
+              </div>
+              <span class="network-status"><span></span> Map active</span>
+            </div>
+            <div class="network-map-wrap">
+              <div id="map"></div>
+              <div class="network-map-legend">
+                <div><i class="source"></i> Surplus source <b id="legend-source-count">0</b></div>
+                <div><i class="recipient"></i> Recipient <b id="legend-recipient-count">0</b></div>
+                <small>Synthetic prototype data</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="network-panel" aria-labelledby="connectionsTitle">
+            <div class="network-label">CONNECT</div>
+            <h2 id="connectionsTitle">Network Connections</h2>
+            <p class="network-muted">Choose one surplus source and one recipient.</p>
+
+            <div class="network-list-section">
+              <div class="network-list-title">Surplus Sources <span id="sourceCount"></span></div>
+              <div id="sourceList" class="network-entity-list"></div>
+            </div>
+
+            <div class="network-list-section">
+              <div class="network-list-title">Recipients <span id="recipientCount"></span></div>
+              <div id="recipientList" class="network-entity-list"></div>
+            </div>
+
+            <div id="selectedConnection" class="network-connection-card"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="networkReportView" class="network-report-view" hidden aria-labelledby="reportTitle">
+        <div class="network-report-head">
+          <div>
+            <div class="network-eyebrow">SAVED OPERATION</div>
+            <h1 id="reportTitle">Network Report</h1>
+            <p id="reportMeta"></p>
+          </div>
+          <span class="network-saved-badge">✓ Operation Saved</span>
+        </div>
+
+        <div id="networkReportBody"></div>
+
+        <section class="network-report-section">
+          <div class="network-label">HISTORY</div>
+          <h2>Saved Network Operations</h2>
+          <div id="networkOpsBody"></div>
+        </section>
+
+        <button type="button" id="networkBackBtn" class="network-secondary">← Back to Network</button>
+      </section>
+    </main>
+  </div>
+
+  <div id="networkToast" class="network-toast" role="status" aria-live="polite"></div>
+
+  <div id="networkDeleteModal" class="network-modal" hidden>
+    <div class="network-modal__backdrop"></div>
+    <div class="network-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+      <h2 id="deleteTitle">Delete this operation?</h2>
+      <p id="deleteMessage">This removes only the saved operation. Source and recipient data are not affected.</p>
+      <div class="network-modal__actions">
+        <button type="button" id="networkDeleteCancel" class="network-secondary">Cancel</button>
+        <button type="button" id="networkDeleteConfirm" class="network-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="map.js"></script>
+  <script src="network.js"></script>
+</body>
+
+</html>
