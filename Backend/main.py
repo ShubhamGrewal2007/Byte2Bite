@@ -1,10 +1,6 @@
 """
 Byte2Bite Backend
-Task 1 - Backend Foundation
 
-Unified FastAPI data service for the Byte2Bite SIH prototype.
-Task 1 intentionally contains no AI/ML, analytics, OSM/map logic,
-redistribution matching, authentication, database, or business logic.
 """
 
 from contextlib import asynccontextmanager
@@ -16,6 +12,8 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from database import init_db
 from routers.db_health import router as db_health_router
@@ -34,6 +32,7 @@ from routers.dashboard import router as dashboard_router
 # ---------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
+FRONTEND_DIR = BASE_DIR.parent / "Frontend"
 
 REQUIRED_DATA_DIRS = [
     DATA_DIR / "synthetic" / "inventory",
@@ -329,6 +328,7 @@ async def lifespan(app: FastAPI):
     print("=" * 60)
     print(" Byte2Bite Backend (Task 1 Foundation) started")
     print(f" Data root: {DATA_DIR}")
+    print(f" Frontend:  {FRONTEND_DIR}")
     print(" Docs:      http://127.0.0.1:8000/docs")
     print("=" * 60)
 
@@ -378,13 +378,25 @@ app.include_router(redistribution_router)
 app.include_router(dashboard_router)
 
 
-@app.get("/", tags=["Root"])
-def root():
-    return {
-        "service": "Byte2Bite Backend",
-        "task": "Task 1 - Backend Foundation",
-        "message": "Backend is running.",
-        "api_info": "/api",
-        "health": "/api/health",
-        "docs": "/docs",
-    }
+# ---------------------------------------------------------------------------
+# Frontend (static files)
+# ---------------------------------------------------------------------------
+# Serve the existing Frontend/ directory through the same FastAPI service.
+# FRONTEND_DIR is resolved from this file's location, so the mount works on
+# Linux/Render regardless of the process working directory.
+# All API routes and the FastAPI docs (/docs, /openapi.json, /redoc) were
+# registered above and therefore take precedence over the static mount.
+# ---------------------------------------------------------------------------
+
+@app.get("/", include_in_schema=False)
+def root_redirect():
+    """Redirect the root path to the existing Dashboard entry page."""
+    return RedirectResponse(url="/Dashboard/Dashboard.html", status_code=307)
+
+
+if FRONTEND_DIR.is_dir():
+    app.mount(
+        "/",
+        StaticFiles(directory=str(FRONTEND_DIR), html=True),
+        name="frontend",
+    )
