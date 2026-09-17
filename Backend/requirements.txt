@@ -1,9 +1,26 @@
+# ============================================================
+# Byte2Bite Backend requirements
+# ============================================================
+
+# --- Web framework ---
 fastapi
 uvicorn[standard]
-sqlalchemy
-python-jose[cryptography]
-passlib[bcrypt]
-bcrypt
+
+# --- Data handling ---
 pydantic
+python-multipart
+
+# --- Database ---
+sqlalchemy
+alembic
+
+# --- Auth ---
+# pwdlib replaces passlib. passlib 1.7.4 is unmaintained and does
+# not work on Python 3.13+. pwdlib uses Argon2 for new hashes and
+# still verifies existing bcrypt hashes.
+pwdlib[argon2,bcrypt]
+python-jose[cryptography]
 python-dotenv
-email-validator
+
+# --- Utilities ---
+requests
