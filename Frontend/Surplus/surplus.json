@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "module": "surplus",
+    "version": "1.0",
+    "source": "synthetic prototype data"
+  },
+  "current": {
+    "id": "SUR-CURRENT-2026-09-17-L",
+    "date": "2026-09-17",
+    "meal": "Lunch",
+    "expectedServings": 420,
+    "plannedProduction": 440,
+    "actualProduction": 486,
+    "surplus": 66,
+    "status": "surplus",
+    "redistributed": 40,
+    "remainingSurplus": 26,
+    "ingredients": ["Rice", "Dal", "Mixed Vegetables"]
+  },
+  "history": [
+    {
+      "id": "SUR-2026-09-16-L",
+      "date": "2026-09-16",
+      "meal": "Lunch",
+      "expectedServings": 400,
+      "plannedProduction": 420,
+      "actualProduction": 462,
+      "surplus": 62,
+      "status": "surplus",
+      "redistributed": 35,
+      "remainingSurplus": 27,
+      "ingredients": ["Rice", "Dal", "Vegetables"]
+    },
+    {
+      "id": "SUR-2026-09-15-L",
+      "date": "2026-09-15",
+      "meal": "Lunch",
+      "expectedServings": 410,
+      "plannedProduction": 430,
+      "actualProduction": 455,
+      "surplus": 45,
+      "status": "surplus",
+      "redistributed": 45,
+      "remainingSurplus": 0,
+      "ingredients": ["Rice", "Dal", "Paneer"]
+    },
+    {
+      "id": "SUR-2026-09-14-D",
+      "date": "2026-09-14",
+      "meal": "Dinner",
+      "expectedServings": 390,
+      "plannedProduction": 390,
+      "actualProduction": 390,
+      "surplus": 0,
+      "status": "on-target",
+      "redistributed": 0,
+      "remainingSurplus": 0,
+      "ingredients": ["Roti", "Dal", "Vegetables"]
+    },
+    {
+      "id": "SUR-2026-09-13-D",
+      "date": "2026-09-13",
+      "meal": "Dinner",
+      "expectedServings": 380,
+      "plannedProduction": 400,
+      "actualProduction": 425,
+      "surplus": 45,
+      "status": "surplus",
+      "redistributed": 45,
+      "remainingSurplus": 0,
+      "ingredients": ["Rice", "Dal", "Vegetables"]
+    },
+    {
+      "id": "SUR-2026-09-12-L",
+      "date": "2026-09-12",
+      "meal": "Lunch",
+      "expectedServings": 420,
+      "plannedProduction": 420,
+      "actualProduction": 420,
+      "surplus": 0,
+      "status": "on-target",
+      "redistributed": 0,
+      "remainingSurplus": 0,
+      "ingredients": ["Rice", "Dal", "Vegetables"]
+    },
+    {
+      "id": "SUR-2026-09-11-D",
+      "date": "2026-09-11",
+      "meal": "Dinner",
+      "expectedServings": 450,
+      "plannedProduction": 450,
+      "actualProduction": 438,
+      "surplus": 0,
+      "status": "shortage",
+      "redistributed": 0,
+      "remainingSurplus": 0,
+      "ingredients": ["Roti", "Dal", "Paneer"]
+    },
+    {
+      "id": "SUR-2026-09-10-L",
+      "date": "2026-09-10",
+      "meal": "Lunch",
+      "expectedServings": 400,
+      "plannedProduction": 400,
+      "actualProduction": 392,
+      "surplus": 0,
+      "status": "shortage",
+      "redistributed": 0,
+      "remainingSurplus": 0,
+      "ingredients": ["Rice", "Dal", "Vegetables"]
+    }
+  ],
+  "breakdown": {
+    "buckets": [
+      {"key": "surplus", "label": "Surplus"},
+      {"key": "on-target", "label": "On Target"},
+      {"key": "shortage", "label": "Shortage"}
+    ]
+  }
+}

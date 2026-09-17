@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Byte2Bite · Surplus</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+  <!-- Reuse the dashboard design system, then layer Surplus overrides -->
+  <link rel="stylesheet" href="../Dashboard/Dashboard.css">
+  <link rel="stylesheet" href="surplus.css">
+</head>
+
+<body>
+  <!-- Same mobile shell as Dashboard.html -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="app">
+    <!-- ========== SIDEBAR (matches Dashboard.html; "Surplus" active) ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <span class="logo-text">Byte2Bite</span>
+        </div>
+
+        <button class="collapse-btn" id="collapseBtn" aria-label="Toggle sidebar">
+          <i class="fas fa-chevron-left" id="collapseIcon"></i>
+          <span class="collapse-text" id="collapseText">Collapse</span>
+        </button>
+
+        <nav class="nav-list">
+          <a href="../Dashboard/Dashboard.html" class="nav-item" data-tooltip="Overview">
+            <i class="fas fa-chart-pie"></i>
+            <span class="nav-label">Overview</span>
+          </a>
+          <a href="../Plan/plan.html" class="nav-item" data-tooltip="Plan">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="nav-label">Plan</span>
+          </a>
+          <a href="../Surplus/surplus.html" class="nav-item active" data-tooltip="Surplus" aria-current="page">
+            <i class="fas fa-box-open"></i>
+            <span class="nav-label">Surplus</span>
+          </a>
+          <a href="../Efficiency/efficiency.html" class="nav-item" data-tooltip="Efficiency">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="nav-label">Efficiency</span>
+          </a>
+          <a href="../Impact/impact.html" class="nav-item" data-tooltip="Impact">
+            <i class="fas fa-seedling"></i>
+            <span class="nav-label">Impact</span>
+          </a>
+          <a href="../Network/network.html" class="nav-item" data-tooltip="Network">
+            <i class="fas fa-network-wired"></i>
+            <span class="nav-label">Network</span>
+          </a>
+          <a href="../Reports/reports.html" class="nav-item" data-tooltip="Reports">
+            <i class="fas fa-file-alt"></i>
+            <span class="nav-label">Reports</span>
+          </a>
+          <a href="../Settings/settings.html" class="nav-item" data-tooltip="Settings">
+            <i class="fas fa-gear"></i>
+            <span class="nav-label">Settings</span>
+          </a>
+        </nav>
+      </div>
+      <div class="sidebar-footer">
+        <!-- Sidebar trigger for the same single dropdown component. -->
+        <div class="sidebar-kitchen-wrap" id="sidebarKitchenWrap">
+          <button class="kitchen-badge" id="sidebarKitchenControl" type="button"
+            aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+            <i class="fas fa-utensils"></i>
+            <span class="kitchen-info">Kitchen 01</span>
+          </button>
+        </div>
+        <div class="admin-profile">
+          <div class="avatar">AK</div>
+          <span class="admin-text">Admin</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main">
+      <header class="page-header">
+        <div class="page-header-text">
+          <p class="eyebrow">OPERATIONS</p>
+          <h1>Surplus</h1>
+          <p class="page-subtitle">Track excess production, previous cycles, and recovery-ready meals.</p>
+        </div>
+        <div class="page-header-meta">
+          <!-- Date pill first (Dashboard order), then kitchen/account control -->
+          <span class="date-pill" id="headerDate">—</span>
+
+          <!-- Kitchen / Profile control + dropdown (identical to Dashboard) -->
+          <div class="kitchen-control-wrap" id="topKitchenWrap">
+            <button class="kitchen-control" id="kitchenControl" type="button"
+              aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+              <i class="fas fa-utensils"></i>
+              <span>Kitchen 01</span>
+              <i class="fas fa-chevron-down kitchen-control-caret"></i>
+            </button>
+
+            <div class="kitchen-dropdown" id="kitchenDropdown" role="menu" aria-label="Account menu">
+              <div class="kitchen-dropdown-header">
+                <div class="kitchen-dropdown-avatar">
+                  <i class="fas fa-utensils"></i>
+                </div>
+                <div class="kitchen-dropdown-identity">
+                  <div class="kitchen-name">Kitchen 01</div>
+                  <div class="kitchen-role">Kitchen</div>
+                </div>
+              </div>
+
+              <div class="kitchen-dropdown-divider"></div>
+
+              <a class="kitchen-dropdown-item" role="menuitem" href="../Settings/settings.html">
+                <i class="fas fa-gear"></i>
+                <span>Settings</span>
+              </a>
+
+              <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenProfileBtn">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+              </button>
+
+              <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenSignOutBtn">
+                <i class="fas fa-right-from-bracket"></i>
+                <span>Sign out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div id="loadingState" class="state-card"><i class="fa-solid fa-spinner fa-spin"></i>
+        <p>Loading surplus data…</p>
+      </div>
+      <div id="errorState" class="state-card hidden"><i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Unable to load surplus data.</p><button class="btn btn-secondary" id="retryBtn">Retry</button>
+      </div>
+
+      <div id="contentState" class="hidden">
+        <section class="section" id="sectionCurrentSurplus">
+          <div class="section-header">
+            <h2 class="section-title">Current Surplus</h2><span class="section-note">Latest service</span>
+          </div>
+          <div class="status-banner" id="statusBanner">
+            <div class="status-banner-main"><span class="status-dot"></span>
+              <div><strong id="statusTitle">—</strong>
+                <p id="statusReason">—</p>
+              </div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div><span class="hero-label">Current surplus</span>
+              <div class="hero-number" id="currentSurplus">—</div><span class="hero-unit">meals</span>
+            </div>
+            <div class="metric-grid">
+              <div class="metric-card"><span>Expected</span><strong id="currentExpected">—</strong></div>
+              <div class="metric-card"><span>Planned</span><strong id="currentPlanned">—</strong></div>
+              <div class="metric-card"><span>Actual</span><strong id="currentActual">—</strong></div>
+              <div class="metric-card"><span>Redistributed</span><strong id="currentRedistributed">—</strong></div>
+              <div class="metric-card"><span>Remaining</span><strong id="currentRemaining">—</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="sectionSurplusBreakdown">
+          <div class="section-header">
+            <h2 class="section-title">Surplus Breakdown</h2><span class="section-note" id="breakdownPeriodNote">By
+              status</span>
+          </div>
+          <div class="card">
+            <div class="breakdown-empty hidden" id="surplusBreakdownEmpty"><i class="fa-solid fa-chart-simple"></i>
+              <p>No records to break down.</p><span>Historical records will be summarized here.</span>
+            </div>
+            <div class="breakdown-body" id="surplusBreakdownBody">
+              <div class="breakdown-list" id="surplusBreakdownList"></div>
+              <div class="breakdown-totals" id="surplusBreakdownTotals"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="sectionHistoricalLogs">
+          <div class="section-header">
+            <h2 class="section-title">Historical Logs</h2><span class="section-note">Previous cycles</span>
+          </div>
+          <div class="card table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Meal</th>
+                  <th>Expected</th>
+                  <th>Planned</th>
+                  <th>Actual</th>
+                  <th>Surplus</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+            <div id="historyEmpty" class="empty-state hidden">No historical records available.</div>
+          </div>
+        </section>
+
+        <section class="section" id="sectionRecoveryAction">
+          <div class="section-header">
+            <h2 class="section-title">Recovery Action</h2><span class="section-note">Route surplus for recovery</span>
+          </div>
+          <div class="card recovery-card">
+            <div class="recovery-summary">
+              <div class="recovery-stat"><span>Surplus Meals</span><strong id="recoverySurplusMeals">—</strong></div>
+              <div class="recovery-stat"><span>Redistributed</span><strong id="recoveryRedistributed">—</strong></div>
+              <div class="recovery-stat"><span>Remaining</span><strong id="recoveryRemaining">—</strong></div>
+            </div>
+            <p class="recovery-message" id="recoveryMessage">—</p>
+            <div class="recovery-cta">
+              <button class="btn btn-primary" id="recoverySendBtn" type="button" aria-disabled="true">
+                <i class="fa-solid fa-paper-plane"></i> Send to Network
+              </button>
+              <span class="recovery-cta-note" id="recoveryCtaNote">
+                Open Network to match and route available surplus.
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+    <div class="modal-card"><button class="modal-close" data-close="detailsModal" aria-label="Close">&times;</button>
+      <h2 id="detailsTitle">Surplus Details</h2>
+      <div id="detailsContent"></div>
+    </div>
+  </div>
+  <div class="modal hidden" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+    <div class="modal-card"><button class="modal-close" data-close="deleteModal" aria-label="Close">&times;</button>
+      <h2 id="deleteTitle">Delete historical record?</h2>
+      <p>This removes the record from this browser's Surplus history view.</p>
+      <div class="modal-actions"><button class="btn btn-secondary" id="cancelDelete">Cancel</button><button
+          class="btn btn-danger" id="confirmDelete">Delete</button></div>
+    </div>
+  </div>
+
+  <!-- Shared identity/auth stack (same order as Dashboard.html) -->
+  <script src="../Dashboard/config.js"></script>
+  <script src="../Dashboard/api.js"></script>
+  <script src="../Dashboard/auth-ui.js"></script>
+
+  <!-- Surplus page logic (untouched in behavior) -->
+  <script src="surplus.js"></script>
+
+  <script>
+    if (window.Byte2BiteAuth && typeof window.Byte2BiteAuth.init === "function") {
+      window.Byte2BiteAuth.init();
+    }
+  </script>
+</body>
+
+</html>
