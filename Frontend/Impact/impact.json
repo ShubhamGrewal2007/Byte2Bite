@@ -1,0 +1,98 @@
+[
+  {
+    "id": "IMP-001",
+    "date": "2026-09-01",
+    "meal": "Breakfast",
+    "foodWastePrevented": 12,
+    "surplusRecovered": 8,
+    "materialWaste": 3.2,
+    "energyUsedKwh": 42,
+    "actualProduction": 180,
+    "estimatedCarbonImpact": 7.2,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-002",
+    "date": "2026-09-02",
+    "meal": "Lunch",
+    "foodWastePrevented": 18,
+    "surplusRecovered": 11,
+    "materialWaste": 4.1,
+    "energyUsedKwh": 58,
+    "actualProduction": 240,
+    "estimatedCarbonImpact": 10.8,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-003",
+    "date": "2026-09-03",
+    "meal": "Dinner",
+    "foodWastePrevented": 15,
+    "surplusRecovered": 9,
+    "materialWaste": 3.8,
+    "energyUsedKwh": 51,
+    "actualProduction": 210,
+    "estimatedCarbonImpact": 9.0,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-004",
+    "date": "2026-09-04",
+    "meal": "Lunch",
+    "foodWastePrevented": 21,
+    "surplusRecovered": 14,
+    "materialWaste": 5.0,
+    "energyUsedKwh": 62,
+    "actualProduction": 255,
+    "estimatedCarbonImpact": 12.6,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-005",
+    "date": "2026-09-05",
+    "meal": "Breakfast",
+    "foodWastePrevented": 10,
+    "surplusRecovered": 7,
+    "materialWaste": 2.9,
+    "energyUsedKwh": 39,
+    "actualProduction": 170,
+    "estimatedCarbonImpact": 6.0,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-006",
+    "date": "2026-09-06",
+    "meal": "Dinner",
+    "foodWastePrevented": 24,
+    "surplusRecovered": 16,
+    "materialWaste": 5.6,
+    "energyUsedKwh": 66,
+    "actualProduction": 265,
+    "estimatedCarbonImpact": 14.4,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-007",
+    "date": "2026-09-07",
+    "meal": "Lunch",
+    "foodWastePrevented": 19,
+    "surplusRecovered": 12,
+    "materialWaste": 4.5,
+    "energyUsedKwh": 60,
+    "actualProduction": 248,
+    "estimatedCarbonImpact": 11.4,
+    "source": "demo"
+  },
+  {
+    "id": "IMP-008",
+    "date": "2026-09-08",
+    "meal": "Breakfast",
+    "foodWastePrevented": 14,
+    "surplusRecovered": 10,
+    "materialWaste": 3.4,
+    "energyUsedKwh": 44,
+    "actualProduction": 188,
+    "estimatedCarbonImpact": 8.4,
+    "source": "demo"
+  }
+]

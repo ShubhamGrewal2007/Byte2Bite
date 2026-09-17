@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Byte2Bite sustainability impact dashboard for institutional kitchens.">
+<title>Byte2Bite — Impact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="impact.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+    <div>
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+        <span class="logo-text">Byte2Bite</span>
+      </div>
+
+      <nav class="nav-list">
+        <a href="../Dashboard/Dashboard.html" class="nav-item" data-tooltip="Overview">
+          <i class="fas fa-chart-pie"></i>
+          <span class="nav-label">Overview</span>
+        </a>
+        <a href="../Plan/plan.html" class="nav-item" data-tooltip="Plan">
+          <i class="fas fa-calendar-alt"></i>
+          <span class="nav-label">Plan</span>
+        </a>
+        <a href="../Surplus/surplus.html" class="nav-item" data-tooltip="Surplus">
+          <i class="fas fa-box-open"></i>
+          <span class="nav-label">Surplus</span>
+        </a>
+        <a href="../Efficiency/efficiency.html" class="nav-item" data-tooltip="Efficiency">
+          <i class="fas fa-tachometer-alt"></i>
+          <span class="nav-label">Efficiency</span>
+        </a>
+        <a href="./impact.html" class="nav-item active" data-tooltip="Impact" aria-current="page">
+          <i class="fas fa-seedling"></i>
+          <span class="nav-label">Impact</span>
+        </a>
+        <a href="../Network/network.html" class="nav-item" data-tooltip="Network">
+          <i class="fas fa-network-wired"></i>
+          <span class="nav-label">Network</span>
+        </a>
+        <a href="../Reports/reports.html" class="nav-item" data-tooltip="Reports">
+          <i class="fas fa-file-alt"></i>
+          <span class="nav-label">Reports</span>
+        </a>
+        <a href="../Settings/settings.html" class="nav-item" data-tooltip="Settings">
+          <i class="fas fa-gear"></i>
+          <span class="nav-label">Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-kitchen-wrap" id="sidebarKitchenWrap">
+        <button class="kitchen-badge" id="sidebarKitchenControl" type="button"
+          aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+          <i class="fas fa-utensils"></i>
+          <span class="kitchen-info">Kitchen 01</span>
+        </button>
+      </div>
+      <div class="admin-profile">
+        <div class="avatar">AK</div>
+        <span class="admin-text">Admin</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="page-header">
+      <div class="page-header-text">
+        <p class="eyebrow">SUSTAINABILITY</p>
+        <h1>Impact</h1>
+        <p>Turn kitchen operations into measurable sustainability insights.</p>
+      </div>
+      <div class="page-header-meta">
+        <button class="mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
+        <span class="date-pill" id="headerDate">—</span>
+
+        <div class="kitchen-control-wrap" id="topKitchenWrap">
+          <button class="kitchen-control" id="kitchenControl" type="button"
+            aria-haspopup="menu" aria-expanded="false" aria-controls="kitchenDropdown">
+            <i class="fas fa-utensils"></i>
+            <span>Kitchen 01</span>
+            <i class="fas fa-chevron-down kitchen-control-caret"></i>
+          </button>
+
+          <div class="kitchen-dropdown" id="kitchenDropdown" role="menu" aria-label="Account menu">
+            <div class="kitchen-dropdown-header">
+              <div class="kitchen-dropdown-avatar">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="kitchen-dropdown-identity">
+                <div class="kitchen-name">Kitchen 01</div>
+                <div class="kitchen-role">Kitchen</div>
+              </div>
+            </div>
+
+            <div class="kitchen-dropdown-divider"></div>
+
+            <a class="kitchen-dropdown-item" role="menuitem" href="../Settings/settings.html">
+              <i class="fas fa-gear"></i>
+              <span>Settings</span>
+            </a>
+
+            <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenProfileBtn">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </button>
+
+            <button class="kitchen-dropdown-item" role="menuitem" type="button" id="kitchenSignOutBtn">
+              <i class="fas fa-right-from-bracket"></i>
+              <span>Sign out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <div class="section-heading-text">
+          <h2 id="overview-title">Impact Overview</h2>
+          <p>Current sustainability metrics from recorded kitchen activity.</p>
+        </div>
+        <div id="sourceBadge" class="source-badge">Loading data…</div>
+      </div>
+      <div id="kpis" class="kpi-grid"></div>
+    </section>
+
+    <section class="section grid-2">
+      <article class="card" aria-labelledby="waste-title">
+        <header class="card-head">
+          <div class="card-head-text">
+            <h2 id="waste-title">Waste &amp; Recovery</h2>
+            <p class="section-note">Food and surplus quantities recorded across impact cycles.</p>
+          </div>
+        </header>
+        <div id="wasteRecovery" class="metric-list"></div>
+      </article>
+      <article class="card" aria-labelledby="resource-title">
+        <header class="card-head">
+          <div class="card-head-text">
+            <h2 id="resource-title">Resource Impact</h2>
+            <p class="section-note">Material and energy use associated with recorded production.</p>
+          </div>
+        </header>
+        <div id="resourceImpact" class="metric-list"></div>
+      </article>
+    </section>
+
+    <section class="section grid-2">
+      <article class="card" aria-labelledby="environment-title">
+        <header class="card-head">
+          <div class="card-head-text">
+            <h2 id="environment-title">Environmental Impact</h2>
+            <p class="section-note">Carbon is a prototype estimate, not a certified environmental measurement.</p>
+          </div>
+        </header>
+        <div id="environmentImpact" class="metric-list"></div>
+      </article>
+      <article class="card" aria-labelledby="trend-title">
+        <header class="card-head">
+          <div class="card-head-text">
+            <h2 id="trend-title">Impact Trends</h2>
+            <p class="section-note">Food waste prevented, by recorded date.</p>
+          </div>
+        </header>
+        <div id="trendChart" class="chart-wrap" role="img" aria-label="Impact trend chart"></div>
+      </article>
+    </section>
+
+    <section class="section card" aria-labelledby="breakdown-title">
+      <div class="section-heading">
+        <div class="section-heading-text">
+          <h2 id="breakdown-title">Impact Breakdown</h2>
+          <p>Operational areas represented in the current dataset.</p>
+        </div>
+      </div>
+      <div id="breakdown" class="breakdown-grid"></div>
+    </section>
+
+    <section class="section card" aria-labelledby="history-title">
+      <div class="section-heading">
+        <div class="section-heading-text">
+          <h2 id="history-title">Historical Impact</h2>
+          <p id="historyCount" class="history-count"></p>
+        </div>
+      </div>
+      <div class="filters" role="search">
+        <label>Search<input id="search" type="search" placeholder="Date, meal, source"></label>
+        <label>Period<select id="historyPeriod"><option value="all">All Records</option><option value="7">Last 7 recorded days</option><option value="30">Last 30 recorded days</option><option value="custom">Custom</option></select></label>
+        <label id="fromWrap" class="hidden">From<input id="fromDate" type="date"></label>
+        <label id="toWrap" class="hidden">To<input id="toDate" type="date"></label>
+        <label>Meal<select id="mealFilter"><option>All</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option></select></label>
+        <label>Source<select id="sourceFilter"><option>All</option><option>Demo Data</option><option>Added by User</option></select></label>
+        <label>Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="meal">Meal A–Z</option></select></label>
+        <button id="resetFilters" class="button secondary" type="button">Reset</button>
+      </div>
+      <div class="table-scroll">
+        <table><thead><tr><th>Date</th><th>Meal</th><th>Food Waste Prevented</th><th>Surplus Recovered</th><th>Material Waste</th><th>Energy Used</th><th>Carbon Impact</th><th>Source</th><th>Actions</th></tr></thead><tbody id="historyBody"></tbody></table>
+      </div>
+      <div id="historyCards" class="history-cards"></div>
+    </section>
+
+    <section class="section card" aria-labelledby="insights-title">
+      <div class="section-heading">
+        <div class="section-heading-text">
+          <h2 id="insights-title">Impact Insights</h2>
+          <p>Deterministic observations based only on this kitchen's recorded data.</p>
+        </div>
+      </div>
+      <div id="insights" class="insights-grid"></div>
+    </section>
+
+    <section class="section card report-card" aria-labelledby="report-title">
+      <div class="section-heading">
+        <div class="section-heading-text">
+          <h2 id="report-title">Impact Summary</h2>
+          <p>Prepare an export-ready structured report view from a selected reporting period.</p>
+        </div>
+      </div>
+      <div class="report-controls">
+        <label>Reporting period<select id="reportPeriod"><option value="all">All Records</option><option value="7">Last 7 recorded days</option><option value="30">Last 30 recorded days</option><option value="custom">Custom</option></select></label>
+        <label id="reportFromWrap" class="hidden">From<input id="reportFrom" type="date"></label>
+        <label id="reportToWrap" class="hidden">To<input id="reportTo" type="date"></label>
+        <button id="prepareReport" class="button" type="button">Prepare Report</button>
+      </div>
+      <div id="reportPreview"></div>
+      <p id="reportStatus" class="status" aria-live="polite"></p>
+    </section>
+  </main>
+</div>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel">
+    <button id="closeModal" class="modal-close" type="button" aria-label="Close">×</button>
+    <h2 id="modalTitle">Impact details</h2>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Shared identity/auth stack (same order as Dashboard/Efficiency) -->
+<script src="../Dashboard/config.js"></script>
+<script src="../Dashboard/api.js"></script>
+<script src="../Dashboard/auth-ui.js"></script>
+
+<script src="impact.js"></script>
+
+<script>
+  if (window.Byte2BiteAuth && typeof window.Byte2BiteAuth.init === "function") {
+    window.Byte2BiteAuth.init();
+  }
+</script>
+</body>
+</html>
