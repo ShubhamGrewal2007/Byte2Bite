@@ -1,0 +1,32 @@
+{
+  "profile": {
+    "institutionName": "Kitchen 01",
+    "kitchenId": "B2B-KIT-001",
+    "location": "Building A — Main Campus",
+    "dailyMeals": 850,
+    "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri"]
+  },
+  "preferences": {
+    "planningMode": "balanced",
+    "planningBuffer": 8,
+    "servingUnit": "grams",
+    "reportingPeriod": "last30"
+  },
+  "notifications": {
+    "expiryAlerts": true,
+    "surplusAlerts": true,
+    "efficiencyAlerts": false,
+    "networkAlerts": true
+  },
+  "data": {
+    "sourceStatus": "Local demo data",
+    "usingLocalDemoData": true,
+    "lastLocalUpdate": "2026-09-18T08:00:00Z"
+  },
+  "application": {
+    "name": "Byte2Bite",
+    "version": "0.9.0-prototype",
+    "environment": "Local development",
+    "prototypeStatus": "Prototype / demo build"
+  }
+}

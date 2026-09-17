@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Byte2Bite · Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation"><i class="fas fa-bars"></i></button>
+  <div class="overlay" id="overlay"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand"><span class="brand-mark"><i class="fas fa-leaf"></i></span><span class="brand-text">Byte2Bite</span></div>
+      <nav class="nav">
+        <a href="../Dashboard/Dashboard.html" class="nav-item">Overview</a>
+        <a href="../Plan/plan.html" class="nav-item">Plan</a>
+        <a href="../Surplus/surplus.html" class="nav-item">Surplus</a>
+        <a href="../Efficiency/efficiency.html" class="nav-item">Efficiency</a>
+        <a href="../Impact/impact.html" class="nav-item">Impact</a>
+        <a href="../Network/network.html" class="nav-item">Network</a>
+        <a href="../Reports/reports.html" class="nav-item">Reports</a>
+        <a href="settings.html" class="nav-item active" aria-current="page">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Byte2Bite</p>
+          <h1>Settings</h1>
+          <p class="page-desc">Control Byte2Bite application and kitchen preferences. Changes are saved locally to this browser.</p>
+        </div>
+        <span class="save-state" id="globalSaveState" role="status" aria-live="polite"></span>
+      </header>
+
+      <section class="settings-card" id="kitchenProfileCard">
+        <header class="card-header"><div><h2 class="card-title"><i class="fas fa-utensils"></i> Kitchen Profile</h2><p class="card-desc">Institution identity and operational basics.</p></div></header>
+        <form id="profileForm" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="profileName">Kitchen / Institution Name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="profileName" name="institutionName" maxlength="80" autocomplete="organization" aria-required="true" aria-describedby="profileNameError" data-profile-field="institutionName" />
+              <p class="field-error" id="profileNameError" role="alert" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="profileKitchenId">Kitchen ID</label>
+              <input type="text" id="profileKitchenId" name="kitchenId" readonly aria-readonly="true" tabindex="0" />
+              <p class="field-hint">System-assigned configuration value. Read-only.</p>
+            </div>
+            <div class="form-field">
+              <label for="profileLocation">Location <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="profileLocation" name="location" maxlength="120" autocomplete="address-level2" aria-required="true" aria-describedby="profileLocationError" data-profile-field="location" />
+              <p class="field-error" id="profileLocationError" role="alert" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="profileDailyMeals">Daily Meals <span class="req" aria-hidden="true">*</span></label>
+              <input type="number" id="profileDailyMeals" name="dailyMeals" min="1" step="1" inputmode="numeric" aria-required="true" aria-describedby="profileDailyMealsError" data-profile-field="dailyMeals" />
+              <p class="field-error" id="profileDailyMealsError" role="alert" hidden></p>
+            </div>
+            <div class="form-field form-field--full">
+              <fieldset class="days-fieldset" aria-describedby="profileOperatingDaysError">
+                <legend>Operating Days <span class="req" aria-hidden="true">*</span></legend>
+                <div class="days-grid" id="operatingDaysGrid" role="group" aria-label="Operating days"></div>
+              </fieldset>
+              <p class="field-error" id="profileOperatingDaysError" role="alert" hidden></p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <span class="unsaved-indicator" id="profileUnsaved" hidden><i class="fas fa-circle" aria-hidden="true"></i> Unsaved changes</span>
+            <div class="form-actions-buttons">
+              <button type="button" class="btn btn-secondary" id="profileResetBtn">Reset</button>
+              <button type="submit" class="btn btn-primary" id="profileSaveBtn">Save Changes</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="settings-card" id="preferencesCard">
+        <header class="card-header"><div><h2 class="card-title"><i class="fas fa-sliders-h"></i> Planning &amp; Operational Preferences</h2><p class="card-desc">Defaults used when planning meals and generating reports.</p></div></header>
+        <div class="form-grid">
+          <div class="form-field"><label for="prefPlanningMode">Default meal planning mode</label><select id="prefPlanningMode" data-pref-field="planningMode"><option value="balanced">Balanced</option><option value="cost-first">Cost-first</option><option value="sustainability-first">Sustainability-first</option><option value="speed-first">Speed-first</option></select></div>
+          <div class="form-field"><label for="prefPlanningBuffer">Default planning buffer (%)</label><input type="number" id="prefPlanningBuffer" min="0" max="50" step="1" inputmode="numeric" data-pref-field="planningBuffer" /></div>
+          <div class="form-field"><label for="prefServingUnit">Default serving unit</label><select id="prefServingUnit" data-pref-field="servingUnit"><option value="grams">Grams</option><option value="milliliters">Milliliters</option><option value="portions">Portions</option></select></div>
+          <div class="form-field"><label for="prefReportingPeriod">Default reporting period</label><select id="prefReportingPeriod" data-pref-field="reportingPeriod"><option value="last7">Last 7 days</option><option value="last30">Last 30 days</option><option value="last90">Last 90 days</option><option value="all">All records</option></select></div>
+        </div>
+        <div class="form-actions"><span class="unsaved-indicator" id="preferencesUnsaved" hidden><i class="fas fa-circle" aria-hidden="true"></i> Unsaved changes</span><div class="form-actions-buttons"><button type="button" class="btn btn-secondary" id="preferencesResetBtn">Reset</button><button type="button" class="btn btn-primary" id="preferencesSaveBtn">Save Changes</button></div></div>
+      </section>
+
+      <section class="settings-card" id="notificationsCard">
+        <header class="card-header"><div><h2 class="card-title"><i class="fas fa-bell"></i> Notifications &amp; Alerts</h2><p class="card-desc">Toggle in-app alerts for operational events.</p></div></header>
+        <ul class="toggle-list">
+          <li class="toggle-row"><div class="toggle-text"><span class="toggle-title">Expiry alerts</span><span class="toggle-sub">Warn when ingredients approach expiry.</span></div><label class="switch"><input type="checkbox" data-notif-field="expiryAlerts" /><span class="switch-slider" aria-hidden="true"></span><span class="sr-only">Expiry alerts</span></label></li>
+          <li class="toggle-row"><div class="toggle-text"><span class="toggle-title">Surplus alerts</span><span class="toggle-sub">Notify when surplus exceeds the redistribution threshold.</span></div><label class="switch"><input type="checkbox" data-notif-field="surplusAlerts" /><span class="switch-slider" aria-hidden="true"></span><span class="sr-only">Surplus alerts</span></label></li>
+          <li class="toggle-row"><div class="toggle-text"><span class="toggle-title">Efficiency alerts</span><span class="toggle-sub">Flag days where efficiency falls below target.</span></div><label class="switch"><input type="checkbox" data-notif-field="efficiencyAlerts" /><span class="switch-slider" aria-hidden="true"></span><span class="sr-only">Efficiency alerts</span></label></li>
+          <li class="toggle-row"><div class="toggle-text"><span class="toggle-title">Network / redistribution alerts</span><span class="toggle-sub">Receive updates from the redistribution network.</span></div><label class="switch"><input type="checkbox" data-notif-field="networkAlerts" /><span class="switch-slider" aria-hidden="true"></span><span class="sr-only">Network alerts</span></label></li>
+        </ul>
+        <div class="form-actions"><span class="unsaved-indicator" id="notificationsUnsaved" hidden><i class="fas fa-circle" aria-hidden="true"></i> Unsaved changes</span><div class="form-actions-buttons"><button type="button" class="btn btn-secondary" id="notificationsResetBtn">Reset</button><button type="button" class="btn btn-primary" id="notificationsSaveBtn">Save Changes</button></div></div>
+      </section>
+
+      <section class="settings-card" id="dataCard">
+        <header class="card-header"><div><h2 class="card-title"><i class="fas fa-database"></i> Data &amp; Storage</h2><p class="card-desc">Where Byte2Bite reads and stores configuration.</p></div></header>
+        <dl class="info-list">
+          <div class="info-row"><dt>Data source status</dt><dd id="dataSourceStatus">—</dd></div>
+          <div class="info-row"><dt>Local demo data</dt><dd id="dataUsingLocalDemo">—</dd></div>
+          <div class="info-row"><dt>Last local update</dt><dd id="dataLastUpdate">—</dd></div>
+        </dl>
+        <div class="form-actions"><div class="form-actions-buttons"><button type="button" class="btn btn-secondary btn-danger" id="clearLocalBtn"><i class="fas fa-trash-alt" aria-hidden="true"></i> Clear local settings</button></div></div>
+      </section>
+
+      <section class="settings-card" id="applicationCard">
+        <header class="card-header"><div><h2 class="card-title"><i class="fas fa-circle-info"></i> Application Information</h2><p class="card-desc">Build and environment details for this prototype.</p></div></header>
+        <dl class="info-list">
+          <div class="info-row"><dt>Application name</dt><dd id="appName">—</dd></div>
+          <div class="info-row"><dt>Version</dt><dd id="appVersion">—</dd></div>
+          <div class="info-row"><dt>Environment</dt><dd id="appEnvironment">—</dd></div>
+          <div class="info-row"><dt>Prototype / demo status</dt><dd id="appPrototypeStatus">—</dd></div>
+        </dl>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="confirmModal" hidden>
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <h3 id="confirmTitle">Clear local settings?</h3>
+      <p id="confirmBody">This removes your saved preferences from this browser and restores the default demo configuration. This cannot be undone.</p>
+      <div class="modal-actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button type="button" class="btn btn-primary btn-danger" id="confirmClearBtn">Clear settings</button></div>
+    </div>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>
