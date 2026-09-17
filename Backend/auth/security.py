@@ -1,92 +1,77 @@
 """
-Password hashing + JWT encoding/decoding for Byte2Bite (Task 2B).
+Byte2Bite Backend — password hashing and verification.
 
-Keeps cryptographic logic out of route handlers.
+This module was migrated from passlib to pwdlib.
+
+Rationale:
+- passlib 1.7.4 (last release 2020) does not work on Python 3.13+ and
+  has a known incompatibility with bcrypt 4.1.0+ that causes:
+      ValueError: password cannot be longer than 72 bytes
+- pwdlib is the actively maintained successor, uses Argon2 as the
+  primary algorithm, and can still verify existing bcrypt hashes.
+
+Public API is preserved:
+    hash_password(plain_password) -> str
+    verify_password(plain_password, password_hash) -> bool
 """
 
-import os
-from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, Optional
-
-from jose import jwt, JWTError
-from passlib.context import CryptContext
-
+from pwdlib import PasswordHash
+from pwdlib.hashers.argon2 import Argon2Hasher
+from pwdlib.hashers.bcrypt import BcryptHasher
 
 # ---------------------------------------------------------------------------
-# Configuration (environment-driven; no hardcoded secrets)
+# Hasher configuration
+# ---------------------------------------------------------------------------
+# Argon2 is the primary hasher for all newly created passwords.
+# Bcrypt is kept as a fallback so hashes that already exist in the
+# database (created by the previous passlib/bcrypt setup) remain
+# verifiable. PasswordHash.verify() identifies the algorithm from the
+# hash prefix, so both formats are handled transparently.
 # ---------------------------------------------------------------------------
 
-JWT_SECRET_KEY: str = os.getenv("JWT_SECRET_KEY", "")
-JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
-
-if not JWT_SECRET_KEY:
-    # Fail fast in production. For prototype dev, warn loudly.
-    # Do NOT silently fall back to a hardcoded secret.
-    raise RuntimeError(
-        "JWT_SECRET_KEY environment variable is not set. "
-        "Set it before starting the backend, e.g.:\n"
-        "  export JWT_SECRET_KEY=$(python -c \"import secrets; print(secrets.token_urlsafe(64))\")\n"
-        "Or place it in a .env file (see README)."
+password_hash = PasswordHash(
+    (
+        Argon2Hasher(),
+        BcryptHasher(),
     )
-
-
-# ---------------------------------------------------------------------------
-# Password hashing
-# ---------------------------------------------------------------------------
-
-# bcrypt is the industry standard; passlib handles salt + rounds.
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+)
 
 
 def hash_password(plain_password: str) -> str:
-    """Return a bcrypt hash for the given plaintext password."""
-    return pwd_context.hash(plain_password)
-
-
-def verify_password(plain_password: str, password_hash: str) -> bool:
-    """Constant-time verification of a plaintext password against a hash."""
-    if not password_hash:
-        return False
-    try:
-        return pwd_context.verify(plain_password, password_hash)
-    except ValueError:
-        # Malformed hash in DB — treat as failed auth, don't 500.
-        return False
-
-
-# ---------------------------------------------------------------------------
-# JWT
-# ---------------------------------------------------------------------------
-
-def create_access_token(
-    subject: str,
-    extra_claims: Optional[Dict[str, Any]] = None,
-    expires_delta: Optional[timedelta] = None,
-) -> str:
     """
-    Create a signed JWT.
+    Hash a plaintext password using the recommended hasher (Argon2).
 
-    `subject` is conventionally the user id (as a string).
-    `extra_claims` typically carries `email` and `role`.
+    Returns the encoded hash string, including algorithm identifier
+    and salt, suitable for storage in the database.
     """
-    now = datetime.now(timezone.utc)
-    expire = now + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
-
-    payload: Dict[str, Any] = {
-        "sub": str(subject),
-        "iat": int(now.timestamp()),
-        "exp": int(expire.timestamp()),
-    }
-    if extra_claims:
-        payload.update(extra_claims)
-
-    return jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+    return password_hash.hash(plain_password)
 
 
-def decode_access_token(token: str) -> Dict[str, Any]:
+def verify_password(plain_password: str, password_hash_value: str) -> bool:
     """
-    Decode and verify a JWT. Raises JWTError on any problem
-    (bad signature, expired, malformed).
+    Verify a plaintext password against a stored hash.
+
+    Supports both Argon2 hashes (created by this module) and legacy
+    bcrypt hashes (created before the migration). Returns True if the
+    password matches, False otherwise.
     """
-    return jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+    return password_hash.verify(plain_password, password_hash_value)
+
+
+def verify_and_update(
+    plain_password: str, password_hash_value: str
+) -> tuple[bool, str | None]:
+    """
+    Verify a password and, if the stored hash uses an outdated
+    algorithm or parameters, return a new hash.
+
+    Returns:
+        (True, new_hash)  if the password is valid and the hash was upgraded
+        (True, None)      if the password is valid and the hash is current
+        (False, None)     if the password is invalid
+
+    Callers that perform authentication should store new_hash back to
+    the database when it is not None. This is the recommended pattern
+    for gradual migration from bcrypt to Argon2.
+    """
+    return password_hash.verify_and_update(plain_password, password_hash_value)
